@@ -128,6 +128,32 @@
   color: #ffffff;
 }
 
+.platform-sponsor-container {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.platform-sponsor-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.platform-sponsor-logo {
+  display: block;
+  margin: 0 auto;
+  height: 48px;
+  width: auto;
+  max-width: 220px;
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Animations */
 .animate-on-scroll {
   opacity: 0;
@@ -167,6 +193,15 @@
   
   .contact-phone {
     align-self: flex-start;
+  }
+
+  .platform-sponsor-container {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+  }
+
+  .platform-sponsor-logo {
+    height: 36px;
   }
 }
 
