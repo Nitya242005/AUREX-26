@@ -1,0 +1,84 @@
+.team-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-bg);
+  border: 1px solid rgba(8, 27, 143, 0.1);
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  min-width: 180px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.flow-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.flow-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.flow-arrow {
+  color: #ccc;
+}
+
+.team-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.rule-card {
+  background-color: var(--color-bg);
+  padding: 2rem;
+  border-radius: 1rem;
+  border-top: 4px solid var(--color-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  text-align: left;
+}
+
+.rule-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.rule-desc {
+  color: #555;
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .team-rules-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-flow {
+    flex-direction: column;
+  }
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+}

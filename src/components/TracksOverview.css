@@ -1,0 +1,86 @@
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.track-card {
+  background-color: var(--color-bg);
+  border: 1px solid rgba(8, 27, 143, 0.08);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.track-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(8, 27, 143, 0.08);
+}
+
+.track-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+}
+
+.track-card:hover::before {
+  transform: scaleX(1);
+}
+
+.track-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: rgba(8, 27, 143, 0.05);
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  line-height: 1;
+}
+
+.track-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+  z-index: 1;
+}
+
+.track-desc {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  z-index: 1;
+  min-height: 3.2rem; /* Enforces a uniform 2-line height */
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Special styling for Chatbot track if needed */
+.track-card.featured-track {
+  border: 1px solid rgba(8, 27, 143, 0.2);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(245, 247, 252, 1) 100%);
+}
+
+@media (max-width: 1024px) {
+  .tracks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tracks-grid {
+    grid-template-columns: 1fr;
+  }
+}
