@@ -10,7 +10,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', href: '#', active: true },
     { name: 'About', href: '#about' },
-    { name: 'Tracks', href: '/Aurex26_Tracks_One_Per_Page%20(1).pdf', target: '_blank' },
+    { name: 'Tracks', href: '/AUREX26_Hackathon_Problem_Statements.pdf', target: '_blank' },
     { name: 'Rules', href: '#rules' },
     { name: 'Prizes', href: '#prizes' },
     { name: 'FAQ', href: '#faq' },

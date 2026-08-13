@@ -37,7 +37,7 @@ const Hero = () => {
         
         <div className="hero-buttons animate-fade-in delay-500">
           <DevfolioButton />
-          <a href="/Aurex26_Tracks_One_Per_Page%20(1).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Explore Tracks</a>
+          <a href="/AUREX26_Hackathon_Problem_Statements.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Explore Tracks</a>
         </div>
         
         <div className="hero-stats animate-fade-in delay-500">

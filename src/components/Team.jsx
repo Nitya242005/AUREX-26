@@ -29,8 +29,8 @@ const Team = () => {
   }, []);
 
   const organizers = [
-    { name: "Dinesh", role: "Organizer", img: "/team/Dinesh.png" },
-    { name: "Hariyanka", role: "Organizer", img: "/team/Hariyanka.png" },
+    { name: "Dinesh", role: "Organizer", img: "/team/Dinesh.png?v=2" },
+    { name: "Hariyanka", role: "Organizer", img: "/team/Hariyanka.png?v=2" },
     { name: "Nityasri", role: "Organizer", img: "/team/Nityasri.png" },
     { name: "Avanthika", role: "Organizer", img: "/team/Avanthika.png" },
     { name: "Shanjay", role: "Organizer", img: "/team/Shanjay.png" }
@@ -78,7 +78,7 @@ const Team = () => {
           <div className="team-tier tier-coordinators">
             <div className="team-card card-coordinator">
               <div className="img-container">
-                <img src="/team/Senthil.png" alt="Senthil Kumar" />
+                <img src="/team/Senthil.png?v=2" alt="Senthil Kumar" />
               </div>
               <div className="team-info">
                 <h3 className="team-name">Senthil Kumar</h3>
