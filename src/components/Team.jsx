@@ -46,7 +46,7 @@ const Team = () => {
           <div className="team-tier tier-director">
             <div className="team-card card-director">
               <div className="img-container">
-                <img src="/team/Director.png?v=2" alt="Prof. R. Chandrasekaran" />
+                <img src="/team/Director-Photos.jpeg?v=2" alt="Prof. R. Chandrasekaran" />
               </div>
               <div className="team-info">
                 <h3 className="team-name">Prof. R. Chandrasekaran</h3>

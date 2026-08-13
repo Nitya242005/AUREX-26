@@ -1,6 +1,5 @@
 import React from 'react';
 import './Hero.css';
-import DevfolioButton from './DevfolioButton';
 
 const Hero = () => {
   return (
@@ -31,14 +30,15 @@ const Hero = () => {
           Build. Innovate. Transform Language Technology.
         </h3>
         
-        <p className="hero-description animate-slide-up delay-400">
+        <p className="hero-description animate-slide-up delay-400" style={{ marginBottom: '1.5rem' }}>
           A 24-hour innovation challenge where technology meets Tamil language, classical Tamil resources, learning and digital innovation.
         </p>
         
-        <div className="hero-buttons animate-fade-in delay-500">
-          <DevfolioButton />
-          <a href="/AUREX26_Hackathon_Problem_Statements.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Explore Tracks</a>
-        </div>
+        <p className="hero-date animate-slide-up delay-400" style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--color-primary)', marginBottom: '3.5rem', letterSpacing: '1px' }}>
+          September 23rd - 24th
+        </p>
+        
+
         
         <div className="hero-stats animate-fade-in delay-500">
           <div className="stat-item">
