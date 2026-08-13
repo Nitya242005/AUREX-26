@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+
 import './FAQ.css';
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => {
@@ -188,10 +189,7 @@ const FAQ = () => {
               <strong>Participants should follow the official Aurex’26 website and Devfolio page for the latest announcements, detailed rules, problem statements, schedules and event-related information.</strong>
             </p>
             <div className="mt-4">
-              <p className="mb-2 font-medium">Have more questions?</p>
-              <a href={devfolioUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Visit Devfolio →
-              </a>
+              <p className="mb-2 font-medium">Have more questions? Contact us.</p>
             </div>
           </div>
         </div>

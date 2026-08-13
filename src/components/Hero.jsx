@@ -1,5 +1,6 @@
 import React from 'react';
 import './Hero.css';
+import DevfolioButton from './DevfolioButton';
 
 const Hero = () => {
   return (
@@ -35,7 +36,7 @@ const Hero = () => {
         </p>
         
         <div className="hero-buttons animate-fade-in delay-500">
-          <a href="https://aurex26.devfolio.co/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Register Now</a>
+          <DevfolioButton />
           <a href="/Aurex26_Tracks_One_Per_Page%20(1).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Explore Tracks</a>
         </div>
         

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import DevfolioButton from './DevfolioButton';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -69,7 +70,7 @@ const Navbar = () => {
         <div className="navbar-right">
           {/* Desktop Actions */}
           <div className="navbar-actions">
-            <a href="https://aurex26.devfolio.co/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Register Now</a>
+            <DevfolioButton />
           </div>
 
           {/* CICT Logo */}
@@ -98,7 +99,7 @@ const Navbar = () => {
             </a>
           ))}
         </nav>
-        <a href="https://aurex26.devfolio.co/" target="_blank" rel="noopener noreferrer" className="btn btn-primary text-center">Register Now</a>
+        <DevfolioButton />
       </div>
     </header>
   );

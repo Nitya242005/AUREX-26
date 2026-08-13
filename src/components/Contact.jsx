@@ -120,7 +120,7 @@ const Contact = () => {
           <h3 className="platform-sponsor-title">Platform Sponsor</h3>
           <img
             src="/devfolio-logo.svg"
-            alt="Devfolio"
+            alt="DEVFOLIO LOGO"
             className="platform-sponsor-logo"
             draggable="false"
           />

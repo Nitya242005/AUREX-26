@@ -39,7 +39,7 @@ const Team = () => {
   return (
     <section className={`team-section section-padding bg-alt ${isVisible ? 'is-visible' : ''}`} id="team" ref={sectionRef}>
       <div className="container">
-        
+
         {/* DIRECTOR */}
         <div className="team-group animate-on-scroll fade-up delay-100">
           <h3 className="team-group-title">CHIEF PATRON</h3>
@@ -87,7 +87,7 @@ const Team = () => {
             </div>
             <div className="team-card card-coordinator">
               <div className="img-container">
-                <img src="/team/murugaswaminathan.jpeg" alt="Murugaswaminathan" />
+                <img src="/team/murugaswaminathan.png" alt="Murugaswaminathan" />
               </div>
               <div className="team-info">
                 <h3 className="team-name">Murugaswaminathan</h3>
@@ -104,17 +104,17 @@ const Team = () => {
             <h2 className="section-title" style={{ fontSize: '2.5rem' }}>MEET THE TEAM</h2>
           </div>
           <div className="team-tier tier-organizers">
-          {organizers.map((org, index) => (
-            <div className="team-card card-organizer" key={index}>
-              <div className="img-container">
-                <img src={org.img} alt={org.name} />
+            {organizers.map((org, index) => (
+              <div className="team-card card-organizer" key={index}>
+                <div className="img-container">
+                  <img src={org.img} alt={org.name} />
+                </div>
+                <div className="team-info">
+                  <h3 className="team-name">{org.name}</h3>
+                  <p className="team-role">{org.role}</p>
+                </div>
               </div>
-              <div className="team-info">
-                <h3 className="team-name">{org.name}</h3>
-                <p className="team-role">{org.role}</p>
-              </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
 

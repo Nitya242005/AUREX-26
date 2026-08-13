@@ -10,7 +10,7 @@ const CTA = () => {
           Explore the six tracks and find the challenge that matches your idea.
         </p>
         <div className="animate-fade-in delay-200">
-          <a href="#" className="btn btn-primary">Explore Tracks →</a>
+          <a href="/Aurex26_Tracks_One_Per_Page%20(1).pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Explore Tracks →</a>
         </div>
       </div>
     </section>
