@@ -114,17 +114,6 @@ const Contact = () => {
             </a>
           </div>
         </div>
-
-        {/* PLATFORM SPONSOR */}
-        <div className="platform-sponsor-container animate-on-scroll fade-up delay-600">
-          <h3 className="platform-sponsor-title">Platform Sponsor</h3>
-          <img
-            src="/devfolio-logo.svg"
-            alt="DEVFOLIO LOGO"
-            className="platform-sponsor-logo"
-            draggable="false"
-          />
-        </div>
       </div>
     </section>
   );

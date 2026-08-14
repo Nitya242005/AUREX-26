@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import DevfolioButton from './DevfolioButton';
 import './Navbar.css';
+
+const REGISTER_URL = "https://unstop.com/o/DkrRFb2?lb=useeBTT8&utm_medium=Share&utm_source=online_coding_challenge&utm_campaign=Euqfzjgm31807";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,7 +71,14 @@ const Navbar = () => {
         <div className="navbar-right">
           {/* Desktop Actions */}
           <div className="navbar-actions">
-            <DevfolioButton />
+            <a
+              href={REGISTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary register-now-btn"
+            >
+              Register Now
+            </a>
           </div>
 
           {/* CICT Logo */}
@@ -99,7 +107,14 @@ const Navbar = () => {
             </a>
           ))}
         </nav>
-        <DevfolioButton />
+        <a
+          href={REGISTER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary register-now-btn"
+        >
+          Register Now
+        </a>
       </div>
     </header>
   );
