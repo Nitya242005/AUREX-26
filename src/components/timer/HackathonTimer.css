@@ -1,0 +1,461 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   AUREX'26 — Hackathon Timer Section
+   All timer UI classes use the `ht-` prefix to avoid
+   collisions with the rest of the site's styles.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── Section shell ──────────────────────────────────────── */
+.ht-section {
+  position: relative;
+  background: linear-gradient(180deg, #020818 0%, #060f3c 55%, #030b24 100%);
+  padding: 5.5rem 0 6.5rem;
+  overflow: hidden;
+}
+
+/* Subtle grid overlay */
+.ht-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201, 168, 76, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ht-bg-glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ht-bg-glow--left {
+  top: -280px;
+  left: -240px;
+  background: radial-gradient(circle, rgba(8, 27, 143, 0.22) 0%, transparent 70%);
+}
+
+.ht-bg-glow--right {
+  bottom: -280px;
+  right: -240px;
+  background: radial-gradient(circle, rgba(8, 27, 143, 0.16) 0%, transparent 70%);
+}
+
+.ht-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Event name label ───────────────────────────────────── */
+.ht-event-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #C9A84C;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* ── Headline ───────────────────────────────────────────── */
+.ht-headline {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgba(236, 238, 255, 0.6);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 2.75rem;
+}
+
+/* ── Timer digits row ───────────────────────────────────── */
+.ht-digits-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.ht-digit-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 128px;
+}
+
+.ht-digit {
+  font-size: 6.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #ECEEFF;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -4px;
+  text-shadow: 0 0 48px rgba(120, 145, 255, 0.3);
+}
+
+.ht-digit-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #C9A84C;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+  opacity: 0.85;
+}
+
+.ht-colon {
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: #C9A84C;
+  line-height: 1;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+  user-select: none;
+}
+
+/* ── Labels below timer ─────────────────────────────────── */
+.ht-remaining-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(236, 238, 255, 0.4);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 1.25rem;
+}
+
+.ht-date-display {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(236, 238, 255, 0.45);
+  letter-spacing: 2px;
+  margin-top: 2.25rem;
+}
+
+/* ── Keep building tagline ──────────────────────────────── */
+.ht-keep-building {
+  font-size: 0.82rem;
+  color: rgba(201, 168, 76, 0.65);
+  letter-spacing: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2.5rem;
+}
+
+/* ── Divider ────────────────────────────────────────────── */
+.ht-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+  margin: 2rem auto;
+}
+
+/* ── LIVE badge ─────────────────────────────────────────── */
+.ht-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  color: #F87171;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.ht-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #EF4444;
+  flex-shrink: 0;
+  animation: ht-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ht-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.65); }
+}
+
+/* ── Register CTA button ────────────────────────────────── */
+.ht-cta-link {
+  display: inline-block;
+  margin-top: 2.75rem;
+  padding: 0.9rem 2.75rem;
+  background: linear-gradient(135deg, #C9A84C 0%, #A8862E 100%);
+  color: #020818;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ht-cta-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(201, 168, 76, 0.32);
+}
+
+/* ── Progress bar ───────────────────────────────────────── */
+.ht-progress-wrapper {
+  width: 100%;
+  max-width: 560px;
+  margin: 2.25rem auto 0;
+}
+
+.ht-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.ht-progress-label-side {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(236, 238, 255, 0.35);
+}
+
+.ht-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(236, 238, 255, 0.07);
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+}
+
+.ht-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8A6820, #C9A84C);
+  border-radius: 2px;
+  position: relative;
+  /* Smooth width changes driven by the 1s interval tick */
+  transition: width 0.9s linear;
+  min-width: 10px;
+}
+
+.ht-progress-dot {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #C9A84C;
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.7);
+}
+
+.ht-progress-pct {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(201, 168, 76, 0.65);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 0.9rem;
+}
+
+/* ── Phase block ────────────────────────────────────────── */
+.ht-phase-block {
+  margin-top: 2.5rem;
+  padding: 1.1rem 2rem;
+  border: 1px solid rgba(201, 168, 76, 0.14);
+  border-radius: 0.75rem;
+  background: rgba(201, 168, 76, 0.04);
+  display: inline-block;
+  min-width: 260px;
+}
+
+.ht-phase-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.45);
+  margin-bottom: 0.4rem;
+}
+
+.ht-phase-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #C9A84C;
+  letter-spacing: 1px;
+  margin-bottom: 0.35rem;
+}
+
+.ht-phase-subtitle {
+  font-size: 0.75rem;
+  color: rgba(236, 238, 255, 0.45);
+  letter-spacing: 2px;
+}
+
+/* ── Completed state ────────────────────────────────────── */
+.ht-completed-check {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1.5px solid rgba(201, 168, 76, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  font-size: 1.6rem;
+  color: #C9A84C;
+  line-height: 1;
+}
+
+.ht-completed-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ECEEFF;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.ht-completed-message {
+  font-size: 1.2rem;
+  color: rgba(201, 168, 76, 0.85);
+  font-weight: 400;
+  line-height: 1.9;
+  max-width: 580px;
+  margin: 0 auto 2.5rem;
+}
+
+.ht-completed-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ht-btn-gold {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  background: linear-gradient(135deg, #C9A84C 0%, #A8862E 100%);
+  color: #020818;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ht-btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
+}
+
+.ht-btn-outline-light {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  background: transparent;
+  color: #ECEEFF;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  border: 1.5px solid rgba(236, 238, 255, 0.22);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ht-btn-outline-light:hover {
+  border-color: rgba(236, 238, 255, 0.5);
+  background: rgba(236, 238, 255, 0.05);
+}
+
+.ht-results-soon {
+  font-size: 0.82rem;
+  color: rgba(236, 238, 255, 0.35);
+  letter-spacing: 2px;
+  margin-top: 1rem;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .ht-digit       { font-size: 5rem; letter-spacing: -3px; }
+  .ht-colon       { font-size: 4.5rem; }
+  .ht-digit-block { min-width: 105px; }
+}
+
+@media (max-width: 768px) {
+  .ht-section     { padding: 4rem 0 5rem; }
+  .ht-digit       { font-size: 4rem; letter-spacing: -2px; }
+  .ht-colon       { font-size: 3.5rem; margin-bottom: 1.6rem; }
+  .ht-digit-block { min-width: 80px; }
+  .ht-headline    { font-size: 1.05rem; letter-spacing: 3px; }
+  .ht-completed-title { font-size: 1.3rem; }
+  .ht-completed-message { font-size: 1.05rem; }
+}
+
+@media (max-width: 480px) {
+  .ht-section     { padding: 3.5rem 0 4rem; }
+  .ht-digit       { font-size: 3rem; letter-spacing: -1px; }
+  .ht-colon       { font-size: 2.5rem; margin-bottom: 1.2rem; }
+  .ht-digit-block { min-width: 62px; }
+  .ht-headline    { font-size: 0.85rem; letter-spacing: 2px; }
+  .ht-event-name  { font-size: 0.75rem; letter-spacing: 4px; }
+  .ht-phase-block { min-width: unset; width: 100%; max-width: 320px; }
+  .ht-progress-wrapper { padding: 0 0.5rem; }
+}
+
+/* ── Full-Screen Live Display banner ─────────────────────── */
+.ht-live-display-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 2rem;
+  background: rgba(239, 68, 68, 0.07);
+  color: #F87171;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.ht-live-display-banner:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.ht-live-display-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #EF4444;
+  flex-shrink: 0;
+  animation: ht-pulse 1.6s ease-in-out infinite;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .ht-live-dot         { animation: none; }
+  .ht-progress-fill    { transition: none; }
+  .ht-cta-link:hover,
+  .ht-btn-gold:hover   { transform: none; }
+}

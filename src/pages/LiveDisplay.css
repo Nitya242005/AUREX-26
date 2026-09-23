@@ -1,0 +1,455 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   AUREX'26 — Full-Screen Live Display  (/aurex26/live)
+   All classes prefixed `ld-` to prevent collisions.
+   Primary target: 1920×1080 projector / LED screen.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── Reset for this page only ────────────────────────── */
+.ld-page *,
+.ld-page *::before,
+.ld-page *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Page shell ──────────────────────────────────────── */
+.ld-page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(170deg, #020818 0%, #060f3c 55%, #030b24 100%);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Background grid ─────────────────────────────────── */
+.ld-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201, 168, 76, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Radial glow orbs ────────────────────────────────── */
+.ld-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ld-glow--tl {
+  width: 900px;
+  height: 900px;
+  top: -350px;
+  left: -300px;
+  background: radial-gradient(circle, rgba(8, 27, 143, 0.2) 0%, transparent 65%);
+}
+
+.ld-glow--br {
+  width: 800px;
+  height: 800px;
+  bottom: -300px;
+  right: -250px;
+  background: radial-gradient(circle, rgba(8, 27, 143, 0.15) 0%, transparent 65%);
+}
+
+.ld-glow--center {
+  width: 1200px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(6, 15, 60, 0.5) 0%, transparent 70%);
+}
+
+/* ── Tamil letter atmosphere ─────────────────────────── */
+.ld-tamil {
+  position: absolute;
+  font-weight: 800;
+  color: rgba(8, 27, 143, 0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  font-size: clamp(10rem, 20vw, 22rem);
+}
+
+.ld-tamil--1 { top: 5%;  left: 2%;  transform: rotate(-12deg); }
+.ld-tamil--2 { bottom: 8%; right: 2%; transform: rotate(14deg);  }
+
+/* ── Giant AUREX'26 watermark ────────────────────────── */
+.ld-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(6rem, 20vw, 20rem);
+  font-weight: 800;
+  letter-spacing: clamp(-4px, -0.5vw, -12px);
+  color: rgba(8, 27, 143, 0.07);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  line-height: 1;
+}
+
+/* ── Main foreground content ─────────────────────────── */
+.ld-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 3rem;
+  width: 100%;
+  max-width: 1600px;
+  /* Use dvh so it shrinks on mobile with address bar */
+  max-height: 100dvh;
+}
+
+/* ── Event name label ────────────────────────────────── */
+.ld-event-name {
+  font-size: clamp(0.65rem, 1.1vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: clamp(5px, 1vw, 10px);
+  color: #C9A84C;
+  text-transform: uppercase;
+  margin-bottom: clamp(0.6rem, 1.2vh, 1.2rem);
+}
+
+/* ── Headline ────────────────────────────────────────── */
+.ld-headline {
+  font-size: clamp(0.8rem, 1.4vw, 1.2rem);
+  font-weight: 600;
+  color: rgba(236, 238, 255, 0.5);
+  letter-spacing: clamp(3px, 0.8vw, 7px);
+  text-transform: uppercase;
+  margin-bottom: clamp(1.5rem, 3vh, 3rem);
+}
+
+/* ── LIVE badge ──────────────────────────────────────── */
+.ld-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  color: #F87171;
+  padding: 0.4rem 1.1rem;
+  border-radius: 2rem;
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+.ld-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #EF4444;
+  flex-shrink: 0;
+  animation: ld-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ld-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.6); }
+}
+
+/* ── Timer digits row ────────────────────────────────── */
+.ld-digits-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
+  flex-wrap: nowrap;
+  margin-bottom: clamp(0.5rem, 1vh, 1rem);
+}
+
+.ld-digit-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: clamp(80px, 12vw, 180px);
+}
+
+.ld-digit {
+  font-size: clamp(3.5rem, 11vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #ECEEFF;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: clamp(-2px, -0.3vw, -5px);
+  text-shadow: 0 0 60px rgba(120, 145, 255, 0.25);
+}
+
+.ld-digit-label {
+  font-size: clamp(0.55rem, 0.8vw, 0.72rem);
+  font-weight: 700;
+  color: #C9A84C;
+  letter-spacing: clamp(3px, 0.5vw, 5px);
+  text-transform: uppercase;
+  margin-top: clamp(0.3rem, 0.7vh, 0.7rem);
+  opacity: 0.85;
+}
+
+.ld-colon {
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 800;
+  color: #C9A84C;
+  line-height: 1;
+  margin-bottom: clamp(1.2rem, 2.5vh, 2.5rem);
+  opacity: 0.65;
+  user-select: none;
+}
+
+/* ── Supporting labels ───────────────────────────────── */
+.ld-remaining-label {
+  font-size: clamp(0.6rem, 0.85vw, 0.75rem);
+  font-weight: 700;
+  color: rgba(236, 238, 255, 0.35);
+  letter-spacing: clamp(3px, 0.6vw, 5px);
+  text-transform: uppercase;
+  margin-bottom: clamp(1rem, 2vh, 2rem);
+}
+
+.ld-date-label {
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  color: rgba(236, 238, 255, 0.4);
+  letter-spacing: 2px;
+  margin-top: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+/* ── Progress bar ────────────────────────────────────── */
+.ld-progress-wrapper {
+  width: 100%;
+  max-width: clamp(400px, 55vw, 800px);
+  margin: 0 auto;
+  margin-bottom: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+.ld-progress-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.ld-progress-end-label {
+  font-size: clamp(0.55rem, 0.75vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(236, 238, 255, 0.28);
+}
+
+.ld-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(236, 238, 255, 0.07);
+  border-radius: 2px;
+  position: relative;
+  overflow: visible;
+}
+
+.ld-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8A6820, #C9A84C);
+  border-radius: 2px;
+  position: relative;
+  transition: width 0.9s linear;
+  min-width: 10px;
+}
+
+.ld-progress-dot {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #C9A84C;
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.7);
+}
+
+.ld-progress-pct {
+  font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+  font-weight: 700;
+  color: rgba(201, 168, 76, 0.6);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: clamp(0.5rem, 1vh, 1rem);
+}
+
+/* ── Phase block ─────────────────────────────────────── */
+.ld-phase-block {
+  margin-top: clamp(0.8rem, 1.5vh, 1.5rem);
+  padding: clamp(0.7rem, 1.2vh, 1.1rem) clamp(1.2rem, 2vw, 2rem);
+  border: 1px solid rgba(201, 168, 76, 0.14);
+  border-radius: 0.75rem;
+  background: rgba(201, 168, 76, 0.04);
+  display: inline-block;
+}
+
+.ld-phase-label {
+  font-size: clamp(0.55rem, 0.7vw, 0.62rem);
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.45);
+  margin-bottom: 0.3rem;
+}
+
+.ld-phase-name {
+  font-size: clamp(0.85rem, 1.5vw, 1.2rem);
+  font-weight: 800;
+  color: #C9A84C;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.ld-phase-subtitle {
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  color: rgba(236, 238, 255, 0.4);
+  letter-spacing: 2px;
+}
+
+/* ── Keep building tagline ───────────────────────────── */
+.ld-tagline {
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  color: rgba(201, 168, 76, 0.6);
+  letter-spacing: clamp(4px, 0.8vw, 7px);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+/* ── Divider ─────────────────────────────────────────── */
+.ld-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+  margin: clamp(0.8rem, 1.5vh, 1.5rem) auto;
+}
+
+/* ── Completed state ─────────────────────────────────── */
+.ld-completed-check {
+  width: clamp(50px, 6vw, 72px);
+  height: clamp(50px, 6vw, 72px);
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1.5px solid rgba(201, 168, 76, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto clamp(1rem, 2vh, 1.5rem);
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  color: #C9A84C;
+  line-height: 1;
+}
+
+.ld-completed-headline {
+  font-size: clamp(1.2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: #ECEEFF;
+  letter-spacing: clamp(1px, 0.3vw, 3px);
+  text-transform: uppercase;
+  margin-bottom: clamp(0.8rem, 1.5vh, 1.2rem);
+}
+
+.ld-completed-sub {
+  font-size: clamp(1rem, 2vw, 1.75rem);
+  font-weight: 600;
+  color: #C9A84C;
+  letter-spacing: clamp(2px, 0.4vw, 4px);
+  margin-bottom: clamp(0.6rem, 1vh, 1rem);
+}
+
+.ld-completed-message {
+  font-size: clamp(0.8rem, 1.4vw, 1.1rem);
+  color: rgba(236, 238, 255, 0.5);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ── Disabled state ──────────────────────────────────── */
+.ld-disabled-text {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  color: rgba(236, 238, 255, 0.35);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: clamp(0.5rem, 1vh, 1rem);
+}
+
+/* ── Fullscreen control button ───────────────────────── */
+.ld-fs-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  background: rgba(2, 8, 24, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  color: rgba(201, 168, 76, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: opacity 0.2s, border-color 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.ld-fs-btn:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+  color: #C9A84C;
+}
+
+/* Hide fullscreen button once inside fullscreen — show minimal exit cue */
+.ld-fs-btn--exit {
+  font-size: 0.65rem;
+  opacity: 0.4;
+  padding: 0.35rem 0.7rem;
+}
+
+.ld-fs-btn--exit:hover { opacity: 0.9; }
+
+/* ── Responsive adjustments ──────────────────────────── */
+@media (max-width: 1024px) {
+  .ld-content { padding: 1.5rem 2rem; }
+}
+
+@media (max-width: 768px) {
+  .ld-watermark { font-size: clamp(5rem, 24vw, 10rem); }
+  .ld-content   { padding: 1rem 1rem; }
+  .ld-digits-row { gap: 0; }
+  .ld-digit-block { min-width: clamp(60px, 20vw, 100px); }
+}
+
+@media (max-width: 480px) {
+  .ld-live-badge    { font-size: 0.65rem; letter-spacing: 3px; }
+  .ld-progress-wrapper { padding: 0 0.5rem; }
+}
+
+/* Reduced-motion: kill pulse + progress transition */
+@media (prefers-reduced-motion: reduce) {
+  .ld-live-dot       { animation: none; }
+  .ld-progress-fill  { transition: none; }
+}
